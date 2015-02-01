@@ -15,29 +15,28 @@ public class Task {
     public static final String ITEM_SEP = System.getProperty("line.separator");
 
 
-
-    public enum Status {
-        NOTDONE, Status, DONE
-    };
-
     public final static String TITLE = "title";
     public final static String STATUS = "status";
     public final static String DATE = "date";
     public final static String FILENAME = "filename";
-
+    public final static String POSITION = "position";
     public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
             "HH:mm", Locale.US);
 
     private String mTitle = new String();
-    private Status mStatus = Status.NOTDONE;
+    private boolean mStatus;
     private String mDate = new String();
 
-    Task(String title, Status status, String date) {
+    Task(String title, Boolean status, String date) {
         this.mTitle = title;
         this.mStatus = status;
         this.mDate = date;
     }
-
+    Task(String title, Boolean status, String date, int pos) {
+        this.mTitle = title;
+        this.mStatus = status;
+        this.mDate = date;
+    }
     // Create a new ToDoItem from data packaged in an Intent
 
     Task(Intent intent) {
@@ -45,7 +44,7 @@ public class Task {
         mTitle = intent.getStringExtra(Task.TITLE);
 
        // mStatus = Status.valueOf(intent.getStringExtra(Task.STATUS));
-        mStatus = Status.NOTDONE;
+        mStatus = false;
         mDate = intent.getStringExtra(Task.DATE);
         //        try {
 //            mDate = Task.FORMAT.parse(intent.getStringExtra(Task.DATE));
@@ -62,11 +61,11 @@ public class Task {
         mTitle = title;
     }
 
-    public Status getStatus() {
+    public boolean getStatus() {
         return mStatus;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Boolean status) {
         mStatus = status;
     }
 
@@ -86,16 +85,22 @@ public class Task {
 
         intent.putExtra(Task.TITLE, title);
         intent.putExtra(Task.DATE, date);
+    }
+    public static void packageIntent(Intent intent, String title,
+                                     String date, int pos) {
 
+        intent.putExtra(Task.TITLE, title);
+        intent.putExtra(Task.DATE, date);
+        intent.putExtra(Task.POSITION, pos);
     }
 
     public String toString() {
         return mTitle + ITEM_SEP +  mStatus + ITEM_SEP
-                + FORMAT.format(mDate);
+                + mDate;
     }
 
     public String toLog() {
         return "Title:" + mTitle + ITEM_SEP  + "Status:" + mStatus + ITEM_SEP + "Date:"
-                + FORMAT.format(mDate);
+                + mDate;
     }
 }

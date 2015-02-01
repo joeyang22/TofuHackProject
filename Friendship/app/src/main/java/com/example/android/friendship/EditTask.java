@@ -16,7 +16,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddNewTask extends Activity {
+public class EditTask extends Activity {
 
     // 7 days in milliseconds - 7 * 24 * 60 * 60 * 1000
     private static final int SEVEN_DAYS = 604800000;
@@ -27,7 +27,7 @@ public class AddNewTask extends Activity {
     private static String dateString;
     private static TextView dateView;
     private static TextView timeView;
-
+    private int pos;
 
     private Date mDate;
     private RadioGroup mPriorityRadioGroup;
@@ -41,15 +41,30 @@ public class AddNewTask extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_task);
+        setContentView(R.layout.edit_task);
 
         mTitleText = (EditText) findViewById(R.id.title);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
-
+        Intent intent = getIntent();
+        pos = Integer.parseInt(intent.getStringExtra("position"));
         setDefaultDateTime();
         Calendar then=Calendar.getInstance();
+        //then.set(Calendar.HOUR_OF_DAY, 2);
+//       timePicker.setOnTimeChangedListener( new TimePicker.OnTimeChangedListener() {
+//           @Override
+//           public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+//               Calendar then=Calendar.getInstance();
+//
+//               then.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//               then.set(Calendar.MINUTE, minute);
+//               then.set(Calendar.SECOND, 0);
+//               Log.d("Flag","diks");
+//
+//           }
+//       });
 
+        //
 
         final Button cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new OnClickListener() {
@@ -62,7 +77,14 @@ public class AddNewTask extends Activity {
 
             }
         });
-
+        final Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener((new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.mAdapter.delete(pos);
+                finish();
+            }
+        }));
         //timeString = String.valueOf(then.()) + ":" + String.valueOf(timePicker.getCurrentMinute());
 
 
@@ -98,10 +120,13 @@ public class AddNewTask extends Activity {
                 //Log.d("TIME",timeString);
                 // Package ToDoItem data into an Intent
                 Intent data = new Intent();
-                Task.packageIntent(data, titleString, time);
+                Task.packageIntent(data, titleString, time,pos);
 
                 //TODO - return data Intent and finish
-                setResult(RESULT_OK, data);
+                //setResult(RESULT_OK, data);
+                Task toDoItem = new Task(data);
+
+                MainActivity.mAdapter.update(toDoItem,pos);
                 finish();
 
 
@@ -129,7 +154,7 @@ public class AddNewTask extends Activity {
 
 
         //setTimeString(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE),
-         //       c.get(Calendar.MILLISECOND));
+        //       c.get(Calendar.MILLISECOND));
 
         //timeView.setText("lol");
     }
@@ -145,75 +170,8 @@ public class AddNewTask extends Activity {
         return hour + ":" + minute;
     }
 
-//
 
-    // DialogFragment used to pick a ToDoItem deadline date
-
-//    public static class DatePickerFragment extends DialogFragment implements
-//            DatePickerDialog.OnDateSetListener {
-//
-//        @Override
-//        public Dialog onCreateDialog(Bundle savedInstanceState) {
-//
-//            // Use the current date as the default date in the picker
-//
-//            final Calendar c = Calendar.getInstance();
-//            int year = c.get(Calendar.YEAR);
-//            int month = c.get(Calendar.MONTH);
-//            int day = c.get(Calendar.DAY_OF_MONTH);
-//
-//            // Create a new instance of DatePickerDialog and return it
-//            return new DatePickerDialog(getActivity(), this, year, month, day);
-//        }
-//
-//        @Override
-//        public void onDateSet(DatePicker view, int year, int monthOfYear,
-//                              int dayOfMonth) {
-//            setDateString(year, monthOfYear, dayOfMonth);
-//
-//            dateView.setText(dateString);
-//        }
-//
-//    }
-
-    // DialogFragment used to pick a ToDoItem deadline time
-
-//    public static class TimePickerFragment extends DialogFragment implements
-//            TimePickerDialog.OnTimeSetListener {
-//
-//        @Override
-//        public Dialog onCreateDialog(Bundle savedInstanceState) {
-//
-//            // Use the current time as the default values for the picker
-//            final Calendar c = Calendar.getInstance();
-//            int hour = c.get(Calendar.HOUR_OF_DAY);
-//            int minute = c.get(Calendar.MINUTE);
-//
-//            // Create a new instance of TimePickerDialog and return
-//            return new TimePickerDialog(getActivity(), this, hour, minute,
-//                    true);
-//        }
-//
-//        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//            setTimeString(hourOfDay, minute);
-//
-//            timeView.setText(timeString);
-//        }
-//    }
-    //@Override
-
-
-
-//    private void showDatePickerDialog() {
-//        DialogFragment newFragment = new DatePickerFragment();
-//        newFragment.show(getFragmentManager(), "datePicker");
-//    }
-//private void showTimePickerDialog() {
-//    DialogFragment newFragment = new TimePickerFragment();
-//    newFragment.show(getFragmentManager(), "timePicker");
-//}
-//
-    public void log(String msg) {
+    private void log(String msg) {
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {

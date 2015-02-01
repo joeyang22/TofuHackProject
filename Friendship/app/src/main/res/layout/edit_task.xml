@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- Title -->
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="40dp" />
+    <!--<TextView-->
+    <!--android:id="@+id/TitleLabel"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/timePicker"-->
+    <!--android:text="Title"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge" >-->
+    <!--</TextView>-->
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timePicker"
+        android:ems="10"
+        android:hint="Enter task name"
+        android:inputType="textShortMessage"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" >
+
+        <!--android:layout_toRightOf="@+id/TitleLabel"-->
+        <!--android:layout_toEndOf="@+id/TitleLabel">-->
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/submitButton"
+        android:layout_below="@+id/title"
+        android:layout_alignLeft="@+id/title"
+        android:layout_alignStart="@+id/title"
+        android:layout_marginLeft="79dp"
+        android:layout_marginStart="79dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/cancelButton"
+        android:layout_alignTop="@+id/submitButton"
+        android:layout_toRightOf="@+id/submitButton"
+        android:layout_toEndOf="@+id/submitButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/deleteButton"
+        android:layout_below="@+id/submitButton"
+        android:layout_alignLeft="@+id/submitButton"
+        android:layout_alignStart="@+id/submitButton"
+        android:layout_alignRight="@+id/cancelButton"
+        android:layout_alignEnd="@+id/cancelButton" />
+
+    <!-- Status -->
+
+    <!--<RadioGroup-->
+    <!--android:id="@+id/statusGroup"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_below="@id/status"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_marginTop="12dp" >-->
+
+    <!--<RadioButton-->
+    <!--android:id="@+id/statusDone"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Done" />-->
+
+    <!--<RadioButton-->
+    <!--android:id="@+id/statusNotDone"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:checked="true"-->
+    <!--android:text="Not Done" />-->
+    <!--</RadioGroup>-->
+
+
+    <!-- Time and Date -->
+
+    <!--<TextView-->
+    <!--android:id="@+id/time_and_date"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="time_and_date_string"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:layout_below="@+id/title"-->
+
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/date"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="no_date_set_string"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/time"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="no_time_set_string"-->
+    <!--android:layout_alignTop="@+id/date"-->
+    <!--android:layout_alignRight="@+id/title"-->
+    <!--android:layout_alignEnd="@+id/title" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/date_picker_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="choose_date_string"-->
+    <!--android:layout_below="@+id/date"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/time_picker_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignTop="@id/date_picker_button"-->
+    <!--android:layout_below="@id/time"-->
+    <!--android:text="choose_time_string" />-->
+
+    <!-- Buttons -->
+
+    <!--<Button-->
+    <!--android:id="@+id/resetButton"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:text="reset" />-->
+
+
+</RelativeLayout>
