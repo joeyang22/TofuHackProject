@@ -20,22 +20,26 @@ public class Task {
     public final static String DATE = "date";
     public final static String FILENAME = "filename";
     public final static String POSITION = "position";
+    public final static String POINTS = "points";
     public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
             "HH:mm", Locale.US);
 
     private String mTitle = new String();
     private boolean mStatus;
     private String mDate = new String();
+    private String mPoints;
 
-    Task(String title, Boolean status, String date) {
+    Task(String title, Boolean status, String date, String points) {
         this.mTitle = title;
         this.mStatus = status;
         this.mDate = date;
+        this.mPoints = points;
     }
-    Task(String title, Boolean status, String date, int pos) {
+    Task(String title, Boolean status, String date, String points, int pos) {
         this.mTitle = title;
         this.mStatus = status;
         this.mDate = date;
+        this.mPoints = points;
     }
     // Create a new ToDoItem from data packaged in an Intent
 
@@ -46,6 +50,7 @@ public class Task {
        // mStatus = Status.valueOf(intent.getStringExtra(Task.STATUS));
         mStatus = false;
         mDate = intent.getStringExtra(Task.DATE);
+        mPoints = intent.getStringExtra(Task.POINTS);
         //        try {
 //            mDate = Task.FORMAT.parse(intent.getStringExtra(Task.DATE));
 //        } catch (ParseException e) {
@@ -77,20 +82,29 @@ public class Task {
         mDate = date;
     }
 
+    public String getPoints(){
+        return mPoints;
+    }
+    public void setPoints(String points){
+        mPoints = points;
+    }
+
     // Take a set of String data values and
     // package them for transport in an Intent
 
     public static void packageIntent(Intent intent, String title,
-                                String date) {
+                                String date, String points) {
 
         intent.putExtra(Task.TITLE, title);
         intent.putExtra(Task.DATE, date);
+        intent.putExtra(Task.POINTS, points);
     }
     public static void packageIntent(Intent intent, String title,
-                                     String date, int pos) {
+                                     String date,String points, int pos) {
 
         intent.putExtra(Task.TITLE, title);
         intent.putExtra(Task.DATE, date);
+        intent.putExtra(Task.POINTS, points);
         intent.putExtra(Task.POSITION, pos);
     }
 

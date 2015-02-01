@@ -2,6 +2,7 @@ package com.example.android.friendship;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ public class TaskAdapter extends BaseAdapter {
     public void update(Task item, int pos){
         mItems.get(pos).setTitle(item.getTitle());
         mItems.get(pos).setDate(item.getDate());
+        mItems.get(pos).setPoints(item.getPoints());
         notifyDataSetChanged();
     }
 
@@ -78,27 +80,16 @@ public class TaskAdapter extends BaseAdapter {
         final TextView titleView = (TextView) itemLayout.findViewById(R.id.titleView);
         titleView.setText(toDoItem.getTitle());
 
+        final TextView pointsView =(TextView) itemLayout.findViewById(R.id.points);
 
-
-        final CheckBox statusView = (CheckBox) itemLayout.findViewById(R.id.statusCheckBox);
-        statusView.setChecked(toDoItem.getStatus());
-
-        statusView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                                         boolean isChecked) {
-
-                toDoItem.setStatus(isChecked ? true : false);
-
-
-            }
-        });
+        pointsView.setText(toDoItem.getPoints());
+        pointsView.setTextColor(Color.parseColor("#FF5722"));
         final ImageButton button = (ImageButton) itemLayout.findViewById(R.id.btnEdit);
 
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 //
-              log(""+itemPos);
+                log(""+itemPos);
 
                 Intent intent = new Intent(context, EditTask.class);
                 intent.putExtra("position", String.valueOf(itemPos));
@@ -109,6 +100,26 @@ public class TaskAdapter extends BaseAdapter {
                 //Perform action on click
             }
         });
+        final CheckBox statusView = (CheckBox) itemLayout.findViewById(R.id.statusCheckBox);
+        statusView.setChecked(toDoItem.getStatus());
+
+        statusView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+
+                toDoItem.setStatus(isChecked ? true : false);
+//                if (toDoItem.getStatus()){
+//                    statusView.setEnabled(false);
+//                    titleView.setEnabled(false);
+//                    pointsView.setTextColor(Color.parseColor("#B2EBF2"));
+//                    button.setEnabled(false);
+//                }
+
+
+            }
+        });
+
 
 
 

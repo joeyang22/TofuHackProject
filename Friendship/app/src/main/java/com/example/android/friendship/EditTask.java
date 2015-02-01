@@ -1,6 +1,9 @@
 package com.example.android.friendship;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -30,13 +31,9 @@ public class EditTask extends Activity {
     private int pos;
 
     private Date mDate;
-    private RadioGroup mPriorityRadioGroup;
-    private RadioGroup mStatusRadioGroup;
     private EditText mTitleText;
     private TimePicker timePicker;
-    private RadioButton mDefaultStatusButton;
-    private RadioButton mDefaultPriorityButton;
-
+    private EditText mNumberText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +43,7 @@ public class EditTask extends Activity {
         mTitleText = (EditText) findViewById(R.id.title);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
+        mNumberText = (EditText) findViewById(R.id.editPoints);
         Intent intent = getIntent();
         pos = Integer.parseInt(intent.getStringExtra("position"));
         setDefaultDateTime();
@@ -102,7 +100,7 @@ public class EditTask extends Activity {
 
 
                 //TODO -  Get Status
-
+                String points = mNumberText.getText().toString();
 
                 //TODO -  Title
                 String titleString = mTitleText.getText().toString();
@@ -110,6 +108,21 @@ public class EditTask extends Activity {
 
                 int heure = timePicker.getCurrentHour();
                 int minut = timePicker.getCurrentMinute();
+
+                Calendar calNow = Calendar.getInstance();
+                Calendar calSet = (Calendar) calNow.clone();
+
+                calSet.set(Calendar.HOUR_OF_DAY, heure);
+                calSet.set(Calendar.MINUTE, minut);
+                calSet.set(Calendar.SECOND, 0);
+                calSet.set(Calendar.MILLISECOND, 0);
+
+                if (calSet.compareTo(calNow) <= 0) {
+                    // Today Set time passed, count to tomorrow
+                    calSet.add(Calendar.DATE, 1);
+                }
+
+                setAlarm(calSet);
 
                 //Calendar thing = Calendar.getInstance();
                 //thing.set(Calendar.HOUR_OF_DAY,timePicker.getCurrentHour());
@@ -119,12 +132,15 @@ public class EditTask extends Activity {
                 String time = unFuckShit(heure, minut);
                 //Log.d("TIME",timeString);
                 // Package ToDoItem data into an Intent
+
                 Intent data = new Intent();
-                Task.packageIntent(data, titleString, time,pos);
+                Task.packageIntent(data, titleString, time,points,pos);
 
                 //TODO - return data Intent and finish
                 //setResult(RESULT_OK, data);
                 Task toDoItem = new Task(data);
+
+
 
                 MainActivity.mAdapter.update(toDoItem,pos);
                 finish();
@@ -133,6 +149,22 @@ public class EditTask extends Activity {
 
             }
         });
+    }
+
+
+    private void setAlarm(Calendar targetCal) {
+
+//        textAlarmPrompt.setText("\n\n***\n" + "Alarm is set "
+//                + targetCal.getTime() + "\n" + "***\n");
+
+        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                getBaseContext(), 1, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
+                pendingIntent);
+
+
     }
 
     // Do not modify below here

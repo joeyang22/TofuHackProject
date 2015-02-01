@@ -60,6 +60,27 @@
         android:layout_toRightOf="@+id/submitButton"
         android:layout_toEndOf="@+id/submitButton" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/pointsText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/title"
+        android:layout_alignStart="@+id/title"
+        android:layout_alignRight="@+id/title"
+        android:layout_alignEnd="@+id/title"
+        android:hint="write stuff here"
+        android:text="0"/>
+
+    <TextView
+        android:id="@+id/alarmprompt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="#000000" />
+
     <!-- Status -->
 
     <!--<RadioGroup-->

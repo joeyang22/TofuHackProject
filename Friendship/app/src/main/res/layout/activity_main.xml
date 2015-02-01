@@ -9,22 +9,14 @@
         android:id="@android:id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnAddNew" />
+        android:layout_above="@+id/btnAddNew"
+        android:layout_alignParentTop="true"/>
     <Button
         android:id="@+id/btnAddNew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add a new item"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true" />
 
 
 </RelativeLayout>

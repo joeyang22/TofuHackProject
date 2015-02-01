@@ -25,6 +25,7 @@
             android:name=".EditTask"
             android:label="@string/title_activity_edit_task" >
         </activity>
+        <receiver android:name=".AlarmReceiver" android:process=":remote" />
         <uses-permission android:name="android.permission.INTERNET" />
     </application>
 

@@ -12,13 +12,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.twilio.sdk.TwilioRestClient;
-import com.twilio.sdk.TwilioRestException;
-import com.twilio.sdk.resource.factory.MessageFactory;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -28,15 +21,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends ListActivity {
     private ListView listView;
     private Button btnAddNew;
     private Button button;
 
-    private static final String FILE_NAME = "oo.txt";
+    private static final String FILE_NAME = "save_data.txt";
     private static final String TAG = "Lab-UserInterface";
 
     public static final int ADD_TODO_ITEM_REQUEST = 0;
@@ -54,29 +45,28 @@ public class MainActivity extends ListActivity {
         getListView().setFooterDividersEnabled(true);
         ListView list = getListView();
         Button addBtn = (Button) findViewById(R.id.btnAddNew);
-        Button button = (Button) findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
-
-                // Build a filter for the MessageList
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("Body", "Jenny please?! I love you <3"));
-                params.add(new BasicNameValuePair("To", "+16475234160"));
-                params.add(new BasicNameValuePair("From", "+16476910648"));
-
-                MessageFactory messageFactory = client.getAccount().getMessageFactory();
-                com.twilio.sdk.resource.instance.Message message = null;
-                try {
-                    message = messageFactory.create(params);
-                } catch (TwilioRestException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(message.getSid());
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+//
+//                // Build a filter for the MessageList
+//                List<NameValuePair> params = new ArrayList<NameValuePair>();
+//                params.add(new BasicNameValuePair("Body", "Jenny please?! I love you <3"));
+//                params.add(new BasicNameValuePair("To", "+16475234160"));
+//                params.add(new BasicNameValuePair("From", "+16476910648"));
+//
+//                MessageFactory messageFactory = client.getAccount().getMessageFactory();
+//                com.twilio.sdk.resource.instance.Message message = null;
+//                try {
+//                    message = messageFactory.create(params);
+//                } catch (TwilioRestException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println(message.getSid());
+//            }
+//        });
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +98,27 @@ public class MainActivity extends ListActivity {
 
 
     }
+//    private class DownloadTask extends AsyncTask<String, Void, String> {
+//
+//        @Override
+//        protected String doInBackground(String... urls) {
+//            try {
+//                return loadFromNetwork(urls[0]);
+//            } catch (IOException e) {
+//                return "shit nigga";
+//            }
+//        }
+//
+//        /**
+//         * Uses the logging framework to display the output of the fetch
+//         * operation in the log fragment.
+//         */
+//        @Override
+//        protected void onPostExecute(String result) {
+//            Log.i(TAG, result);
+//        }
+//    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -236,6 +247,7 @@ public class MainActivity extends ListActivity {
             String title = null;
             Boolean status = null;
             String date = null;
+            String points = null;
 
             String temp = reader.readLine();
             while(temp!=null){
@@ -244,7 +256,9 @@ public class MainActivity extends ListActivity {
                 title = temp;
                 status = Boolean.parseBoolean(reader.readLine());
                 date = reader.readLine();
-                mAdapter.add(new Task(title,status,date));
+                points = reader.readLine();
+
+                mAdapter.add(new Task(title,status,date,points));
                 temp = reader.readLine();
 
             }
@@ -279,6 +293,7 @@ public class MainActivity extends ListActivity {
                 writer.println(task.getTitle());
                 writer.println(task.getStatus());
                 writer.println(task.getDate());
+                writer.println(task.getPoints());
 //                log("WTitle: "+task.getTitle());
 //
 //                log("Wstatus: "+task.getStatus());
