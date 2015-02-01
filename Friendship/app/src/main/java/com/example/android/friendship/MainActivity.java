@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -84,17 +82,6 @@ public class MainActivity extends ListActivity {
         });
         getListView().setAdapter(mAdapter);
         list.setTextFilterEnabled(true);
-        list.setOnItemClickListener(new OnItemClickListener() {
-
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                //log("I got dicks in my buttttt");
-//                Intent intent = new Intent(MainActivity.this, EditTask.class);
-//                intent.putExtra("position",pos);
-//                // Start an Activity using that intent and the request code defined above
-//                startActivityForResult(intent, EDIT_TASK_REQUEST);
-            }
-        });
 
 
     }
