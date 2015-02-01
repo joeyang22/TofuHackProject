@@ -1,8 +1,11 @@
 package com.example.android.friendship;
 
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 /**
@@ -13,15 +16,23 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context k1, Intent k2) {
         // TODO Auto-generated method stub
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         // Toast.makeText(k1, "Alarm received!", Toast.LENGTH_LONG).show();
-
-    }
-
-    private void sendNotification(){
         NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.notification_icon)
+                new NotificationCompat.Builder(k1)
+                        .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+                        .setContentText("Hello World!")
+                        .setSound(alarmSound);
+        int mNotificationId=001;
+
+
+        NotificationManager mNotifyMgr =
+                (NotificationManager) k1.getSystemService (Context.NOTIFICATION_SERVICE);
+// Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
     }
+
+
 }
