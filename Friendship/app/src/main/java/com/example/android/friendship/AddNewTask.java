@@ -103,14 +103,14 @@ public class AddNewTask extends Activity {
                     calSet.add(Calendar.DATE, 1);
                 }
 
-                setAlarm(calSet);
+                setAlarm(calSet,titleString);
 
                 //Calendar thing = Calendar.getInstance();
                 //thing.set(Calendar.HOUR_OF_DAY,timePicker.getCurrentHour());
                 //thing.set(Calendar.MINUTE,timePicker.getCurrentMinute());
                 //timeString = thing.getTime().toString();
                 //timeString =                 // Date
-                String time = unFuckShit(heure, minut);
+                String time = dateToString( heure, minut);
                 String words = mPointsText.getText().toString();
                 log(words);
                 //Log.d("TIME",timeString);
@@ -128,7 +128,7 @@ public class AddNewTask extends Activity {
         });
     }
 
-    private void setAlarm(Calendar targetCal) {
+    private void setAlarm(Calendar targetCal, String task) {
 
 //        textAlarmPrompt.setText("\n\n***\n" + "Alarm is set "
 //                + targetCal.getTime() + "\n" + "***\n");
@@ -166,7 +166,7 @@ public class AddNewTask extends Activity {
 
         //timeView.setText("lol");
     }
-    private static String unFuckShit(int hr, int min){
+    private static String dateToString(int hr, int min){
         String hour = "" + hr;
         String minute = "" + min;
 

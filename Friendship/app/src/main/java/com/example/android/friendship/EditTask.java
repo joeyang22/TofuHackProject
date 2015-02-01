@@ -129,7 +129,7 @@ public class EditTask extends Activity {
                 //thing.set(Calendar.MINUTE,timePicker.getCurrentMinute());
                 //timeString = thing.getTime().toString();
                 //timeString =                 // Date
-                String time = unFuckShit(heure, minut);
+                String time = dateToString(heure, minut);
                 //Log.d("TIME",timeString);
                 // Package ToDoItem data into an Intent
 
@@ -152,20 +152,6 @@ public class EditTask extends Activity {
     }
 
 
-    private void setAlarm(Calendar targetCal) {
-
-//        textAlarmPrompt.setText("\n\n***\n" + "Alarm is set "
-//                + targetCal.getTime() + "\n" + "***\n");
-
-        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                getBaseContext(), 1, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
-                pendingIntent);
-
-
-    }
 
     // Do not modify below here
 
@@ -190,7 +176,21 @@ public class EditTask extends Activity {
 
         //timeView.setText("lol");
     }
-    private static String unFuckShit(int hr, int min){
+    private void setAlarm(Calendar targetCal) {
+
+//        textAlarmPrompt.setText("\n\n***\n" + "Alarm is set "
+//                + targetCal.getTime() + "\n" + "***\n");
+
+        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                getBaseContext(), 1, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
+                pendingIntent);
+
+
+    }
+    private static String dateToString(int hr, int min){
         String hour = "" + hr;
         String minute = "" + min;
 

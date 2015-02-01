@@ -16,21 +16,20 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context k1, Intent k2) {
         // TODO Auto-generated method stub
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        // Toast.makeText(k1, "Alarm received!", Toast.LENGTH_LONG).show();
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(k1)
-                        .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!")
-                        .setSound(alarmSound);
-        int mNotificationId=001;
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(k1)
+                            .setSmallIcon(R.drawable.ic_logo)
+                            .setContentTitle("Missed Task!")
+                            .setContentText("Check your feed for details!")
+                            .setSound(alarmSound);
+            int mNotificationId = 001;
 
 
-        NotificationManager mNotifyMgr =
-                (NotificationManager) k1.getSystemService (Context.NOTIFICATION_SERVICE);
+            NotificationManager mNotifyMgr =
+                    (NotificationManager) k1.getSystemService(Context.NOTIFICATION_SERVICE);
 // Builds the notification and issues it.
-        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+            mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
     }
 

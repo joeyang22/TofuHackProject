@@ -42,7 +42,7 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Submit"
         android:id="@+id/submitButton"
         android:layout_below="@+id/title"
@@ -53,7 +53,7 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Cancel"
         android:id="@+id/cancelButton"
         android:layout_alignTop="@+id/submitButton"
@@ -62,14 +62,14 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Delete"
         android:id="@+id/deleteButton"
         android:layout_below="@+id/submitButton"
         android:layout_alignLeft="@+id/submitButton"
-        android:layout_alignStart="@+id/submitButton"
         android:layout_alignRight="@+id/cancelButton"
-        android:layout_alignEnd="@+id/cancelButton" />
+        android:layout_marginTop="0dp"
+        />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,8 +81,8 @@
         android:layout_alignStart="@+id/title"
         android:layout_alignRight="@+id/title"
         android:layout_alignEnd="@+id/title"
-        android:hint="write stuff here"
-        android:text="0"/>
+        android:hint="Enter friend point value"
+        />
 
     <!-- Status -->
 

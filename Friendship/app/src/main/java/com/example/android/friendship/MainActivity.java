@@ -32,7 +32,7 @@ public class MainActivity extends ListActivity {
 
     public static final int ADD_TODO_ITEM_REQUEST = 0;
     public static final int EDIT_TASK_REQUEST = 1;
-    static TaskAdapter mAdapter;
+    public static TaskAdapter mAdapter;
     public static final String ACCOUNT_SID = "AC2160f09796116debaca44e91ed64f0a8";
     public static final String AUTH_TOKEN = "0607fc4fb4204b86ec93cd41c5bc8727";
     @Override

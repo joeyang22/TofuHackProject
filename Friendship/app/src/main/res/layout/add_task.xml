@@ -71,8 +71,8 @@
         android:layout_alignStart="@+id/title"
         android:layout_alignRight="@+id/title"
         android:layout_alignEnd="@+id/title"
-        android:hint="write stuff here"
-        android:text="0"/>
+        android:hint="Enter friend point value"
+        />
 
     <TextView
         android:id="@+id/alarmprompt"
